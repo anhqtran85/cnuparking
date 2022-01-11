@@ -1,0 +1,58 @@
+<nav class="navbar navbar-expand-lg navbar navbar-light" style="background-color: #98AFC7;">
+  <div class="container-fluid">
+    <a class="navbar-brand" style="color:white;" href="{% url 'home' %}">Logout</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" style="color:white;" aria-current="page" href="{% url 'user' %}">My Account</a>
+        </li>
+        <!-- <li class="nav-item dropdown"> -->
+          <a class="nav-link active" style="color:white;" aria-current="page" href="{% url 'map' %}">Map</a>
+          </ul>
+        </div>
+          {% for item in log %}
+          {% if item.currently_parked_here is True and user.username|slugify == item.username|slugify %}
+            {% if item.parking_spot is not Null %}
+                <a class="navbar-brand" style="color:white;" href="../delete/{{item.parking_spot}} ">Leave my spot</a>
+            {% elif item.parking_spotB is not Null %}
+                <a class="navbar-brand" style="color:white;" href="../deleteb/{{item.parking_spotB}} ">Leave my spot</a>
+            {% elif item.parking_spotC1 is not Null %}
+                <a class="navbar-brand" style="color:white;" href="../deletec1/{{item.parking_spotC1}} ">Leave my spot</a>
+            {% elif item.parking_spotC2 is not Null %}
+                <a class="navbar-brand" style="color:white;" href="../deletec2/{{item.parking_spotC2}} ">Leave my spot</a>
+            {% elif item.parking_spotD is not Null %}
+                <a class="navbar-brand" style="color:white;" href="../deleted/{{item.parking_spotD}} ">Leave my spot</a>
+            {% elif item.parking_spotE1 is not Null %}
+                <a class="navbar-brand" style="color:white;" href="../deletee1/{{item.parking_spotE1}} ">Leave my spot</a>
+            {% elif item.parking_spotE2 is not Null %}
+                <a class="navbar-brand" style="color:white;" href="../deletee2/{{item.parking_spotE2}} ">Leave my spot</a>
+            {% elif item.parking_spotE3 is not Null %}
+                <a class="navbar-brand" style="color:white;" href="../deletee3/{{item.parking_spotE3}} ">Leave my spot</a>
+            {% elif item.parking_spotE4 is not Null %}
+                <a class="navbar-brand" style="color:white;" href="../deletee4/{{item.parking_spotE4}} ">Leave my spot</a>
+            {% elif item.parking_spotF is not Null %}
+                <a class="navbar-brand" style="color:white;" href="../deletef/{{item.parking_spotF}} ">Leave my spot</a>
+            {% elif item.parking_spotG is not Null %}
+                <a class="navbar-brand" style="color:white;" href="../deleteg/{{item.parking_spotG}} ">Leave my spot</a>
+            {% elif item.parking_spotH is not Null %}
+                <a class="navbar-brand" style="color:white;" href="../deleteh/{{item.parking_spotH}} ">Leave my spot</a>
+            {% elif item.parking_spotI is not Null %}
+                <a class="navbar-brand" style="color:white;" href="../deletei/{{item.parking_spotI}} ">Leave my spot</a>
+            {% elif item.parking_spotJ is not Null %}
+                <a class="navbar-brand" style="color:white;" href="../deletej/{{item.parking_spotJ}} ">Leave my spot</a>
+            {% elif item.parking_spotK is not Null %}
+                <a class="navbar-brand" style="color:white;" href="../deletek/{{item.parking_spotK}} ">Leave my spot</a>
+            {% elif item.parking_spotL is not Null %}
+                <a class="navbar-brand" style="color:white;" href="../deletel/{{item.parking_spotL}} ">Leave my spot</a>
+            {% elif item.parking_spotM is not Null %}
+                <a class="navbar-brand" style="color:white;" href="../deletem/{{item.parking_spotM}} ">Leave my spot</a>
+          {% endif %}
+
+          {% endif %}
+          {% endfor %}
+
+  </div>
+</nav>

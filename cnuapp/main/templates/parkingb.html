@@ -1,0 +1,132 @@
+{% extends 'main_pages.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% csrf_token %}
+<center>
+    <h1 style="color:black;">Parking B Lot</h1><br/>
+</center>
+{% if messages %}
+<div class="center" style="text-align:center; color: black; border: 1px black solid; font-size: 20px;">
+    {% for message in messages %}
+    {{message}}
+    {% endfor %}
+</div>
+{% endif %}
+<br>
+<!DOCTYPE html>
+<html>
+<head>
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA16q0zdvkU-QUeqkYzKuZzeVVmmQ3mpZs&callback=myMap&libraries=geometry"></script>
+    <style>
+        #map{width:65%;height:65%;
+                    margin-left: auto;
+                    margin-right: auto;}
+        #msg{text-align:center;
+        font-size: 20px;}
+    </style>
+</head>
+<body onload="locate()">
+<div id="map"></div>
+<div id="msg"></div>
+<script>
+				var image = 'http://www.robotwoods.com/dev/misc/bluecircle.png';
+				var b = 'https://img.icons8.com/ios-filled/40/000000/marker-b.png';
+
+				function locate(){
+					navigator.geolocation.getCurrentPosition(initialize,fail);
+				}
+
+				function dist(userMarker, bMarker) {
+					var R = 3958.8;
+					var latitude1 = userMarker.position.lat() * (Math.PI/180);
+					var latitude2 = bMarker.position.lat() * (Math.PI/180);
+					var latDifference = latitude2-latitude1;
+					var lonDifference = (bMarker.position.lng()-userMarker.position.lng()) * (Math.PI/180);
+
+					var total = 2 * R * Math.asin(Math.sqrt(Math.sin(latDifference/2)*Math.sin(latDifference/2)+Math.cos
+					(latitude1)
+					*Math.cos(latitude2)*Math.sin(lonDifference/2)*Math.sin(lonDifference/2)));
+					return total;
+					}
+
+				function initialize(position) {
+					var myLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+					var bLatLng = new google.maps.LatLng(37.063819, -76.491703);
+					var mapOptions = {
+					  zoom: 16,
+					  center: bLatLng,
+					  mapTypeId: google.maps.MapTypeId.HYBRID
+					}
+					var map = new google.maps.Map(document.getElementById('map'),
+												  mapOptions);
+					map.setOptions({styles: [{
+						featureType: "all",
+						elementType: "labels",
+						stylers: [
+						  { visibility: "off" }
+						]
+					}]});
+					var myMarker = new google.maps.Marker({
+						position: myLatLng,
+						map: map,
+						icon: image
+					});
+					var bMarker = new google.maps.Marker({
+						position: bLatLng,
+						map: map,
+						icon: b
+					});
+					var line = new google.maps.Polyline({path: [myLatLng, bLatLng], map: map});
+					var distance = dist(myMarker, bMarker);
+  					document.getElementById('msg').innerHTML = distance.toFixed(2) + " miles away";
+					}
+				 function fail(){
+					 alert('navigator.geolocation failed, may not be supported');
+				 }
+		</script>
+</body>
+</html>
+
+<br><br><br>
+
+<center>
+    <div class="col-md-3"  style="line-height: 0.5">
+        <table class='table table-hover'>
+            <thead class='thead-dark'>
+            <h1>Available Spots:</h1>
+            <tr class="table-light">
+                <th scope="col">Spot</th>
+                <th scope="col">Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in parkingb_spot%}
+            <tr class="table table-striped">
+                {% if item.parkingb_status is True %}
+                <td>{{ item.parkingb_spot }}</td>
+                <td>Available</td>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <td><a href="../updateb/{{item.parkingb_spot}} " class="btn btn-success" type="submit"
+                           value="Update">Take</a></td>
+                </form>
+                {% elif item.parkingb_status is False %}
+                <td>{{ item.parkingb_spot }}</td>
+                <td>Not Available</td>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <td><a href="../updateb/{{item.parkingb_spot}} " class="btn btn-danger" type="submit"
+                           value="Update">Take</a></td>
+                </form>
+                {% endif %}
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</center>
+
+{% endblock %}

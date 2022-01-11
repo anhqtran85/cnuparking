@@ -1,0 +1,98 @@
+
+{% extends 'main_pages.html' %}
+
+	{% block content %}
+		{% if request.user.is_authenticated %}
+		<center>
+		<div class="col-md-3"  style="line-height: 0.5">
+				<table class='table table-hover'>
+					<thead class='thead-dark'>
+						<h3>User Information</h3>
+						<tr>
+							<th scope="col" class="table-light">Name</th>
+							<td>{{user.first_name}} {{user.last_name}}</td>
+						</tr>
+						<body>
+							<tr class="table table-striped">
+								<th scope="col" class="table-light">Username</th>
+								<td>{{user.username}}</td>
+							</tr>
+
+							<tr class="table table-striped">
+								<th scope="col" class="table-light">Email</th>
+								<td>{{user.email}}</td>
+							</tr>
+
+							<tr class="table table-striped">
+								<th scope="col" class="table-light">Group</th>
+								<td>{% for item in user.groups.all %}
+										{{item}}
+									{% endfor %}</td>
+							</tr>
+						</body>
+					</thead>
+				</table>
+			</div>
+		<br>
+			<div class="col-md-3"  style="line-height: 0.5">
+				<table class='table table-hover'>
+					<thead class='thead-dark'>
+					<h3>Log Table</h3>
+					<tr class="table-light">
+						<th scope="col">Spot</th>
+						<th scope="col">Status</th>
+						<th scope="col">Time Parked</th>
+						<th scope="col">Time Left</th>
+					</tr>
+					</thead>
+					<tbody>
+					{% for item in log %}
+						<tr class="table table-striped">
+							{% if item.username|slugify == user.username|slugify %}
+									{% if item.parking_spot is not Null %}
+										<td>{{ item.parking_spot }}</td>
+									{% elif item.parking_spotB is not Null %}
+										<td>{{ item.parking_spotB }}</td>
+									{% elif item.parking_spotC1 is not Null %}
+										<td>{{ item.parking_spotC1 }}</td>
+									{% elif item.parking_spotC2 is not Null %}
+										<td>{{ item.parking_spotC2 }}</td>
+									{% elif item.parking_spotD is not Null %}
+										<td>{{ item.parking_spotD }}</td>
+									{% elif item.parking_spotE1 is not Null %}
+										<td>{{ item.parking_spotE1 }}</td>
+									{% elif item.parking_spotE2 is not Null %}
+										<td>{{ item.parking_spotE2 }}</td>
+									{% elif item.parking_spotE3 is not Null %}
+										<td>{{ item.parking_spotE3 }}</td>
+									{% elif item.parking_spotE4 is not Null %}
+										<td>{{ item.parking_spotE4 }}</td>
+									{% elif item.parking_spotF is not Null %}
+										<td>{{ item.parking_spotF }}</td>
+									{% elif item.parking_spotG is not Null %}
+										<td>{{ item.parking_spotG }}</td>
+									{% elif item.parking_spotH is not Null %}
+										<td>{{ item.parking_spotH }}</td>
+									{% elif item.parking_spotI is not Null %}
+										<td>{{ item.parking_spotI }}</td>
+									{% elif item.parking_spotJ is not Null %}
+										<td>{{ item.parking_spotJ }}</td>
+									{% elif item.parking_spotK is not Null %}
+										<td>{{ item.parking_spotK }}</td>
+									{% elif item.parking_spotL is not Null %}
+										<td>{{ item.parking_spotL }}</td>
+									{% elif item.parking_spotM is not Null %}
+										<td>{{ item.parking_spotM }}</td>
+									{% endif %}
+							<td>{{ item.currently_parked_here}}</td>
+							<td>{{item.time_parked}}</td>
+							<td>{{item.time_left}}</td>
+							{% endif %}
+							{% endfor %}
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</center>
+		{% endif %}
+	{% endblock %}

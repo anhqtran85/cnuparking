@@ -1,0 +1,26 @@
+{% extends 'main_pages.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% csrf_token %}
+<div class="center" style="text-align:center;">
+    <h1>Delete Parking Spot</h1>
+    {% if messages %}
+    <div class="center" style="text-align:center; color: black; border: 2px black solid;">
+        {% for delete in messages %}
+        {{ delete }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    <form method="post" class="form-group" style="display: inline-block;
+                                                margin-top:40;
+                                                text-align: left;
+                                                font-size: 20px;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br>
+        <input type="submit" value="Delete" class="btn btn-secondary">
+        <br><br>
+        <a href="../../map" class="btn btn-secondary">Back to Parking Options</a>
+    </form>
+</div>
+{% endblock %}

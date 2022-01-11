@@ -1,0 +1,1180 @@
+{% extends 'main_pages.html' %}
+
+{% block content %}
+	<center>
+		<h1>{{user.first_name}}, click on a parking lot on the map below:</h1><br/>
+	</center>
+{% if messages %}
+<div class="center" style="text-align:center; color: black; border: 1px black solid; font-size: 20px;">
+	{% for message in messages %}
+	{{message}}
+	{% endfor %}
+</div>
+{% endif %}
+<br>
+	{% for group_for in request.user.groups.all %}
+
+{# CNU VILLAGE #}
+		{% if group_for.name == 'CNU Village' %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+	<meta charset="utf-8">
+	<title>Google Maps User Location</title>
+	<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA16q0zdvkU-QUeqkYzKuZzeVVmmQ3mpZs&callback=myMap&libraries=geometry"></script>
+	<style>
+				#map{width:65%;height:65%;
+							margin-left: auto;
+							margin-right: auto;}
+				</style>
+</head>
+<body onload="locate()">
+<div id="map"></div>
+
+<script>
+				var image = 'http://www.robotwoods.com/dev/misc/bluecircle.png';
+				var g = 'https://img.icons8.com/ios-filled/40/000000/marker-g.png';
+				var j = 'https://img.icons8.com/ios-filled/40/000000/marker-j.png';
+				function locate(){
+					navigator.geolocation.getCurrentPosition(initialize,fail);
+				}
+
+				function initialize(position) {
+					var myLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+					var cnuLatLng = new google.maps.LatLng(37.063659, -76.495880);
+					var gLatLng = new google.maps.LatLng(37.063613, -76.501456);
+					var jLatLng = new google.maps.LatLng(37.063135, -76.497899);
+					var mapOptions = {
+					  zoom: 16,
+					  center: cnuLatLng,
+					  mapTypeId: google.maps.MapTypeId.HYBRID}
+					var map = new google.maps.Map(document.getElementById('map'),
+												  mapOptions);
+					map.setOptions({styles: [{
+						featureType: "all",
+						elementType: "labels",
+						stylers: [
+						  { visibility: "off" }
+						]
+					}]});
+					var myMarker = new google.maps.Marker({
+						position: myLatLng,
+						map: map,
+						icon: image
+					});
+					var gMarker = new google.maps.Marker({
+						position: gLatLng,
+						map: map,
+						icon: g,
+						url: 'https://cnuparking.pythonanywhere.com/parkingg'
+					});
+					var jMarker = new google.maps.Marker({
+						position: jLatLng,
+						map: map,
+						icon: j,
+						url: 'https://cnuparking.pythonanywhere.com/parkingj'
+					});
+					google.maps.event.addListener(gMarker, 'click', function() {
+						window.location.href = gMarker.url;
+					});
+					google.maps.event.addListener(jMarker, 'click', function() {
+						window.location.href = jMarker.url;
+					});
+					}
+
+				 function fail(){
+					 alert('navigator.geolocation failed, may not be supported');
+				 }
+				</script>
+</body>
+</html>
+
+{# MAIN CAMPUS RESIDENT #}
+		{% elif group_for.name == 'Main Campus Resident' %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+	<meta charset="utf-8">
+	<title>Google Maps User Location</title>
+	<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA16q0zdvkU-QUeqkYzKuZzeVVmmQ3mpZs&callback=myMap&libraries=geometry"></script>
+	<style>
+				#map1{width:65%;height:65%;
+							margin-left: auto;
+							margin-right: auto;}
+				</style>
+</head>
+<body onload="locate()">
+<div id="map1"></div>
+
+<script>
+				var image = 'http://www.robotwoods.com/dev/misc/bluecircle.png';
+				var g = 'https://img.icons8.com/ios-filled/40/000000/marker-g.png';
+				var j = 'https://img.icons8.com/ios-filled/40/000000/marker-j.png';
+				var f = 'https://img.icons8.com/ios-filled/40/000000/marker-f.png';
+				var e1 = 'https://img.icons8.com/ios-filled/40/000000/marker-e.png';
+				var e1num = 'https://img.icons8.com/ios-glyphs/30/000000/1.png'
+				var e2 = 'https://img.icons8.com/ios-filled/40/000000/marker-e.png';
+				var e2num = 'https://img.icons8.com/ios-glyphs/30/000000/2.png'
+				var e3 = 'https://img.icons8.com/ios-filled/40/000000/marker-e.png';
+				var e3num = 'https://img.icons8.com/ios-glyphs/30/000000/3.png'
+				var e4 = 'https://img.icons8.com/ios-filled/40/000000/marker-e.png';
+				var e4num = 'https://img.icons8.com/ios-glyphs/30/000000/4.png'
+				var i = 'https://img.icons8.com/ios-filled/40/000000/marker-i.png';
+				function locate(){
+					navigator.geolocation.getCurrentPosition(initialize,fail);
+				}
+
+				function initialize(position) {
+					var myLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+					var cnuLatLng = new google.maps.LatLng(37.063659, -76.495880);
+					var gLatLng = new google.maps.LatLng(37.063613, -76.501456);
+					var jLatLng = new google.maps.LatLng(37.063135, -76.497899);
+					var fLatLng = new google.maps.LatLng(37.064692, -76.496808);
+					var e1LatLng = new google.maps.LatLng(37.066794, -76.493471);
+					var e1LatLng_num = new google.maps.LatLng(37.066847, -76.493008);
+					var e2LatLng = new google.maps.LatLng(37.066610, -76.495431);
+					var e2LatLng_num = new google.maps.LatLng(37.066684, -76.495014);
+					var e3LatLng = new google.maps.LatLng(37.066208, -76.497035);
+					var e3LatLng_num = new google.maps.LatLng(37.066282, -76.496613);
+					var e4LatLng = new google.maps.LatLng(37.065968, -76.498702);
+					var e4LatLng_num = new google.maps.LatLng(37.065914, -76.498426);
+					var iLatLng = new google.maps.LatLng(37.062375, -76.498347);
+
+					var mapOptions = {
+					  zoom: 16,
+					  center: cnuLatLng,
+					  mapTypeId: google.maps.MapTypeId.HYBRID}
+					var map = new google.maps.Map(document.getElementById('map1'),
+												  mapOptions);
+					map.setOptions({styles: [{
+						featureType: "all",
+						elementType: "labels",
+						stylers: [
+						  { visibility: "off" }
+						]
+					}]});
+					var myMarker = new google.maps.Marker({
+						position: myLatLng,
+						map: map,
+						icon: image
+					});
+					var gMarker = new google.maps.Marker({
+						position: gLatLng,
+						map: map,
+						icon: g,
+						url: 'https://cnuparking.pythonanywhere.com/parkingg'
+					});
+					var jMarker = new google.maps.Marker({
+						position: jLatLng,
+						map: map,
+						icon: j,
+						url: 'https://cnuparking.pythonanywhere.com/parkingj'
+					});
+					var fMarker = new google.maps.Marker({
+						position: fLatLng,
+						map: map,
+						icon: f,
+						url: 'https://cnuparking.pythonanywhere.com/parkingf'
+					});
+					var e1Marker = new google.maps.Marker({
+						position: e1LatLng,
+						map: map,
+						icon: e1,
+						url: 'https://cnuparking.pythonanywhere.com/parkinge1'
+					});
+					var e1Markernum = new google.maps.Marker({
+						position: e1LatLng_num,
+						map: map,
+						icon: e1num,
+						url: 'https://cnuparking.pythonanywhere.com/parkinge1'
+					});
+
+					var e2Marker = new google.maps.Marker({
+						position: e2LatLng,
+						map: map,
+						icon: e2,
+						url: 'https://cnuparking.pythonanywhere.com/parkinge2'
+					});
+					var e2Markernum = new google.maps.Marker({
+						position: e2LatLng_num,
+						map: map,
+						icon: e2num,
+						url: 'https://cnuparking.pythonanywhere.com/parkinge2'
+					});
+					var e3Marker = new google.maps.Marker({
+						position: e3LatLng,
+						map: map,
+						icon: e3,
+						url: 'https://cnuparking.pythonanywhere.com/parkinge3'
+					});
+					var e3Markernum = new google.maps.Marker({
+						position: e3LatLng_num,
+						map: map,
+						icon: e3num,
+						url: 'https://cnuparking.pythonanywhere.com/parkinge3'
+					});
+					var e4Marker = new google.maps.Marker({
+						position: e4LatLng,
+						map: map,
+						icon: e4,
+						url: 'https://cnuparking.pythonanywhere.com/parkinge4'
+					});
+					var e4Markernum = new google.maps.Marker({
+						position: e4LatLng_num,
+						map: map,
+						icon: e4num,
+						url: 'https://cnuparking.pythonanywhere.com/parkinge4'
+					});
+					var iMarker = new google.maps.Marker({
+						position: iLatLng,
+						map: map,
+						icon: i,
+						url: 'https://cnuparking.pythonanywhere.com/parkingi'
+					});
+					google.maps.event.addListener(gMarker, 'click', function() {
+						window.location.href = gMarker.url;
+					});
+					google.maps.event.addListener(jMarker, 'click', function() {
+						window.location.href = jMarker.url;
+					});
+					google.maps.event.addListener(fMarker, 'click', function() {
+						window.location.href = fMarker.url;
+					});
+					google.maps.event.addListener(e1Marker, 'click', function() {
+						window.location.href = e1Marker.url;
+					});
+					google.maps.event.addListener(e1Markernum, 'click', function() {
+						window.location.href = e1Markernum.url;
+					});
+					google.maps.event.addListener(e2Marker, 'click', function() {
+						window.location.href = e2Marker.url;
+					});
+					google.maps.event.addListener(e2Markernum, 'click', function() {
+						window.location.href = e2Markernum.url;
+					});
+					google.maps.event.addListener(e3Marker, 'click', function() {
+						window.location.href = e3Marker.url;
+					});
+					google.maps.event.addListener(e3Markernum, 'click', function() {
+						window.location.href = e3Markernum.url;
+					});
+					google.maps.event.addListener(e4Marker, 'click', function() {
+						window.location.href = e4Marker.url;
+					});
+					google.maps.event.addListener(e4Markernum, 'click', function() {
+						window.location.href = e4Markernum.url;
+					});
+					google.maps.event.addListener(iMarker, 'click', function() {
+						window.location.href = iMarker.url;
+					});
+
+					}
+
+				 function fail(){
+					 alert('navigator.geolocation failed, may not be supported');
+				 }
+				</script>
+</body>
+</html>
+
+{# CNU/BARCLAY APARTMENT #}
+		{% elif group_for.name == 'CNU/Barclay Apartments' %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+	<meta charset="utf-8">
+	<title>Google Maps User Location</title>
+	<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA16q0zdvkU-QUeqkYzKuZzeVVmmQ3mpZs&callback=myMap&libraries=geometry"></script>
+	<style>
+				#map2{width:65%;height:65%;
+							margin-left: auto;
+							margin-right: auto;}
+				</style>
+</head>
+<body onload="locate()">
+<div id="map2"></div>
+
+<script>
+				var image = 'http://www.robotwoods.com/dev/misc/bluecircle.png';
+				var g = 'https://img.icons8.com/ios-filled/40/000000/marker-g.png';
+				var j = 'https://img.icons8.com/ios-filled/40/000000/marker-j.png';
+				function locate(){
+					navigator.geolocation.getCurrentPosition(initialize,fail);
+				}
+
+				function initialize(position) {
+					var myLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+					var cnuLatLng = new google.maps.LatLng(37.063659, -76.495880);
+					var gLatLng = new google.maps.LatLng(37.063613, -76.501456);
+					var jLatLng = new google.maps.LatLng(37.063135, -76.497899);
+					var mapOptions = {
+					  zoom: 16,
+					  center: cnuLatLng,
+					  mapTypeId: google.maps.MapTypeId.HYBRID}
+					var map = new google.maps.Map(document.getElementById('map2'),
+												  mapOptions);
+					map.setOptions({styles: [{
+						featureType: "all",
+						elementType: "labels",
+						stylers: [
+						  { visibility: "off" }
+						]
+					}]});
+					var myMarker = new google.maps.Marker({
+						position: myLatLng,
+						map: map,
+						icon: image
+					});
+					var gMarker = new google.maps.Marker({
+						position: gLatLng,
+						map: map,
+						icon: g,
+						url: 'https://cnuparking.pythonanywhere.com/parkingg'
+					});
+					var jMarker = new google.maps.Marker({
+						position: jLatLng,
+						map: map,
+						icon: j,
+						url: 'https://cnuparking.pythonanywhere.com/parkingj'
+					});
+					google.maps.event.addListener(gMarker, 'click', function() {
+						window.location.href = gMarker.url;
+					});
+					google.maps.event.addListener(jMarker, 'click', function() {
+						window.location.href = jMarker.url;
+					});
+					}
+
+				 function fail(){
+					 alert('navigator.geolocation failed, may not be supported');
+				 }
+				</script>
+</body>
+</html>
+
+{# DAY STUDENT #}
+		{% elif group_for.name == 'Day Student' %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+	<meta charset="utf-8">
+	<title>Google Maps User Location</title>
+	<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA16q0zdvkU-QUeqkYzKuZzeVVmmQ3mpZs&callback=myMap&libraries=geometry"></script>
+	<style>
+				#map3{width:65%;height:65%;
+							margin-left: auto;
+							margin-right: auto;}
+				</style>
+</head>
+<body onload="locate()">
+<div id="map3"></div>
+
+<script>
+				var image = 'http://www.robotwoods.com/dev/misc/bluecircle.png';
+				var g = 'https://img.icons8.com/ios-filled/40/000000/marker-g.png';
+				var j = 'https://img.icons8.com/ios-filled/40/000000/marker-j.png';
+				var a = 'https://img.icons8.com/ios-filled/40/000000/marker-a.png';
+				var h = 'https://img.icons8.com/ios-filled/40/000000/marker-h.png';
+				var f = 'https://img.icons8.com/ios-filled/40/000000/marker-f.png';
+				var e4 = 'https://img.icons8.com/ios-filled/40/000000/marker-e.png';
+				var e4num = 'https://img.icons8.com/ios-glyphs/30/000000/4.png'
+
+				function locate(){
+					navigator.geolocation.getCurrentPosition(initialize,fail);
+				}
+
+				function initialize(position) {
+					var myLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+					var cnuLatLng = new google.maps.LatLng(37.063659, -76.495880);
+					var gLatLng = new google.maps.LatLng(37.063613, -76.501456);
+					var jLatLng = new google.maps.LatLng(37.063135, -76.497899);
+					var aLatLng = new google.maps.LatLng(37.060480, -76.489624);
+					var hLatLng = new google.maps.LatLng(37.063207, -76.490231);
+					var fLatLng = new google.maps.LatLng(37.064692, -76.496808);
+					var e4LatLng = new google.maps.LatLng(37.065968, -76.498702);
+					var e4LatLng_num = new google.maps.LatLng(37.065914, -76.498426);
+					var mapOptions = {
+					  zoom: 16,
+					  center: cnuLatLng,
+					  mapTypeId: google.maps.MapTypeId.HYBRID}
+					var map = new google.maps.Map(document.getElementById('map3'),
+												  mapOptions);
+					map.setOptions({styles: [{
+						featureType: "all",
+						elementType: "labels",
+						stylers: [
+						  { visibility: "off" }
+						]
+					}]});
+					var myMarker = new google.maps.Marker({
+						position: myLatLng,
+						map: map,
+						icon: image
+					});
+					var gMarker = new google.maps.Marker({
+						position: gLatLng,
+						map: map,
+						icon: g,
+						url: 'https://cnuparking.pythonanywhere.com/parkingg'
+					});
+					var jMarker = new google.maps.Marker({
+						position: jLatLng,
+						map: map,
+						icon: j,
+						url: 'https://cnuparking.pythonanywhere.com/parkingj'
+					});
+					var aMarker = new google.maps.Marker({
+						position: aLatLng,
+						map: map,
+						icon: a,
+						url: 'https://cnuparking.pythonanywhere.com/parkinga'
+					});
+					var hMarker = new google.maps.Marker({
+						position: hLatLng,
+						map: map,
+						icon: h,
+						url: 'https://cnuparking.pythonanywhere.com/parkingh'
+					});
+					var fMarker = new google.maps.Marker({
+						position: fLatLng,
+						map: map,
+						icon: f,
+						url: 'https://cnuparking.pythonanywhere.com/parkingf'
+					});
+					var e4Marker = new google.maps.Marker({
+						position: e4LatLng,
+						map: map,
+						icon: e4,
+						url: 'https://cnuparking.pythonanywhere.com/parkinge4'
+					});
+					var e4Markernum = new google.maps.Marker({
+						position: e4LatLng_num,
+						map: map,
+						icon: e4num,
+						url: 'https://cnuparking.pythonanywhere.com/parkinge4'
+					});
+					google.maps.event.addListener(gMarker, 'click', function() {
+						window.location.href = gMarker.url;
+					});
+					google.maps.event.addListener(jMarker, 'click', function() {
+						window.location.href = jMarker.url;
+					});
+					google.maps.event.addListener(aMarker, 'click', function() {
+						window.location.href = aMarker.url;
+					});
+					google.maps.event.addListener(hMarker, 'click', function() {
+						window.location.href = hMarker.url;
+					});
+					google.maps.event.addListener(fMarker, 'click', function() {
+						window.location.href = fMarker.url;
+					});
+					google.maps.event.addListener(e4Marker, 'click', function() {
+						window.location.href = e4Marker.url;
+					});
+					google.maps.event.addListener(e4Markernum, 'click', function() {
+						window.location.href = e4Markernum.url;
+					});
+
+					}
+
+				 function fail(){
+					 alert('navigator.geolocation failed, may not be supported');
+				 }
+				</script>
+</body>
+</html>
+
+{# FACULTY/STAFF #}
+		{% elif group_for.name == 'Faculty/Staff' %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+	<meta charset="utf-8">
+	<title>Google Maps User Location</title>
+	<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA16q0zdvkU-QUeqkYzKuZzeVVmmQ3mpZs&callback=myMap&libraries=geometry"></script>
+	<style>
+				#map4{width:65%;height:65%;
+							margin-left: auto;
+							margin-right: auto;}
+				</style>
+</head>
+<body onload="locate()">
+<div id="map4"></div>
+
+<script>
+				var image = 'http://www.robotwoods.com/dev/misc/bluecircle.png';
+				var g = 'https://img.icons8.com/ios-filled/40/000000/marker-g.png';
+				var j = 'https://img.icons8.com/ios-filled/40/000000/marker-j.png';
+				var e1 = 'https://img.icons8.com/ios-filled/40/000000/marker-e.png';
+				var e1num = 'https://img.icons8.com/ios-glyphs/30/000000/1.png'
+				var e2 = 'https://img.icons8.com/ios-filled/40/000000/marker-e.png';
+				var e2num = 'https://img.icons8.com/ios-glyphs/30/000000/2.png'
+				var e3 = 'https://img.icons8.com/ios-filled/40/000000/marker-e.png';
+				var e3num = 'https://img.icons8.com/ios-glyphs/30/000000/3.png'
+				var e4 = 'https://img.icons8.com/ios-filled/40/000000/marker-e.png';
+				var e4num = 'https://img.icons8.com/ios-glyphs/30/000000/4.png';
+				var i = 'https://img.icons8.com/ios-filled/40/000000/marker-i.png';
+				var a = 'https://img.icons8.com/ios-filled/40/000000/marker-a.png';
+				var h = 'https://img.icons8.com/ios-filled/40/000000/marker-h.png';
+				var c1 = 'https://img.icons8.com/ios-filled/40/000000/marker-c.png';
+				var c1num = 'https://img.icons8.com/ios-glyphs/30/000000/1.png';
+				var c2 = 'https://img.icons8.com/ios-filled/40/000000/marker-c.png';
+				var c2num = 'https://img.icons8.com/ios-glyphs/30/000000/2.png';
+				var d = 'https://img.icons8.com/ios-filled/40/000000/marker-d.png';
+				var k = 'https://img.icons8.com/ios-filled/40/000000/marker-k.png';
+				var l = 'https://img.icons8.com/ios-filled/40/000000/marker-l.png';
+				var m = 'https://img.icons8.com/ios-filled/40/000000/marker-m.png';
+
+				function locate(){
+					navigator.geolocation.getCurrentPosition(initialize,fail);
+				}
+
+				function initialize(position) {
+					var myLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+					var cnuLatLng = new google.maps.LatLng(37.063659, -76.495880);
+					var gLatLng = new google.maps.LatLng(37.063613, -76.501456);
+					var jLatLng = new google.maps.LatLng(37.063135, -76.497899);
+					var e1LatLng = new google.maps.LatLng(37.066794, -76.493471);
+					var e1LatLng_num = new google.maps.LatLng(37.066847, -76.493008);
+					var e2LatLng = new google.maps.LatLng(37.066610, -76.495431);
+					var e2LatLng_num = new google.maps.LatLng(37.066684, -76.495014);
+					var e3LatLng = new google.maps.LatLng(37.066208, -76.497035);
+					var e3LatLng_num = new google.maps.LatLng(37.066282, -76.496613);
+					var e4LatLng = new google.maps.LatLng(37.065968, -76.498702);
+					var e4LatLng_num = new google.maps.LatLng(37.065914, -76.498426);
+					var aLatLng = new google.maps.LatLng(37.060480, -76.489624);
+					var hLatLng = new google.maps.LatLng(37.062178, -76.499984);
+					var iLatLng = new google.maps.LatLng(37.062375, -76.498347);
+					var c1LatLng = new google.maps.LatLng(37.064007, -76.491363);
+					var c1LatLng_num = new google.maps.LatLng(37.064096, -76.491103);
+					var c2LatLng = new google.maps.LatLng(37.063207, -76.490231);
+					var c2LatLng_num = new google.maps.LatLng(37.063038, -76.490060);
+					var dLatLng = new google.maps.LatLng(37.065137, -76.493822);
+					var kLatLng = new google.maps.LatLng(37.062073, -76.497454);
+					var lLatLng = new google.maps.LatLng(37.061634, -76.496979);
+					var mLatLng = new google.maps.LatLng(37.061617, -76.495226);
+
+					var mapOptions = {
+					  zoom: 16,
+					  center: cnuLatLng,
+					  mapTypeId: google.maps.MapTypeId.HYBRID}
+					var map = new google.maps.Map(document.getElementById('map4'),
+												  mapOptions);
+					map.setOptions({styles: [{
+						featureType: "all",
+						elementType: "labels",
+						stylers: [
+						  { visibility: "off" }
+						]
+					}]});
+					var myMarker = new google.maps.Marker({
+						position: myLatLng,
+						map: map,
+						icon: image
+					});
+					var gMarker = new google.maps.Marker({
+						position: gLatLng,
+						map: map,
+						icon: g,
+						url: 'https://cnuparking.pythonanywhere.com/parkingg'
+					});
+					var jMarker = new google.maps.Marker({
+						position: jLatLng,
+						map: map,
+						icon: j,
+						url: 'https://cnuparking.pythonanywhere.com/parkingj'
+					});
+					var aMarker = new google.maps.Marker({
+						position: aLatLng,
+						map: map,
+						icon: a,
+						url: 'https://cnuparking.pythonanywhere.com/parkinga'
+					});
+					var hMarker = new google.maps.Marker({
+						position: hLatLng,
+						map: map,
+						icon: h,
+						url: 'https://cnuparking.pythonanywhere.com/parkingh'
+					});
+					var e1Marker = new google.maps.Marker({
+						position: e1LatLng,
+						map: map,
+						icon: e1,
+						url: 'https://cnuparking.pythonanywhere.com/parkinge1'
+					});
+					var e1Markernum = new google.maps.Marker({
+						position: e1LatLng_num,
+						map: map,
+						icon: e1num,
+						url: 'https://cnuparking.pythonanywhere.com/parkinge1'
+					});
+
+					var e2Marker = new google.maps.Marker({
+						position: e2LatLng,
+						map: map,
+						icon: e2,
+						url: 'https://cnuparking.pythonanywhere.com/parkinge2'
+					});
+					var e2Markernum = new google.maps.Marker({
+						position: e2LatLng_num,
+						map: map,
+						icon: e2num,
+						url: 'https://cnuparking.pythonanywhere.com/parkinge2'
+					});
+					var e3Marker = new google.maps.Marker({
+						position: e3LatLng,
+						map: map,
+						icon: e3,
+						url: 'https://cnuparking.pythonanywhere.com/parkinge3'
+					});
+					var e3Markernum = new google.maps.Marker({
+						position: e3LatLng_num,
+						map: map,
+						icon: e3num,
+						url: 'https://cnuparking.pythonanywhere.com/parkinge3'
+					});
+					var e4Marker = new google.maps.Marker({
+						position: e4LatLng,
+						map: map,
+						icon: e4,
+						url: 'https://cnuparking.pythonanywhere.com/parkinge4'
+					});
+					var e4Markernum = new google.maps.Marker({
+						position: e4LatLng_num,
+						map: map,
+						icon: e4num,
+						url: 'https://cnuparking.pythonanywhere.com/parkinge4'
+					});
+					var iMarker = new google.maps.Marker({
+						position: iLatLng,
+						map: map,
+						icon: i,
+						url: 'https://cnuparking.pythonanywhere.com/parkingi'
+					});
+					var c1Marker = new google.maps.Marker({
+						position: c1LatLng,
+						map: map,
+						icon: c1,
+						url: 'https://cnuparking.pythonanywhere.com/parkingc1'
+					});
+					var c1Markernum = new google.maps.Marker({
+						position: c1LatLng_num,
+						map: map,
+						icon: c1num,
+						url: 'https://cnuparking.pythonanywhere.com/parkingc1'
+					});
+					var c2Marker = new google.maps.Marker({
+						position: c2LatLng,
+						map: map,
+						icon: c2,
+						url: 'https://cnuparking.pythonanywhere.com/parkingc2'
+					});
+					var c2Markernum = new google.maps.Marker({
+						position: c2LatLng_num,
+						map: map,
+						icon: c2num,
+						url: 'https://cnuparking.pythonanywhere.com/parkingc2'
+					});
+					var dMarker = new google.maps.Marker({
+						position: dLatLng,
+						map: map,
+						icon: d,
+						url: 'https://cnuparking.pythonanywhere.com/parkingd'
+					});
+					var kMarker = new google.maps.Marker({
+						position: kLatLng,
+						map: map,
+						icon: k,
+						url: 'https://cnuparking.pythonanywhere.com/parkingk'
+					});
+					var lMarker = new google.maps.Marker({
+						position: lLatLng,
+						map: map,
+						icon: l,
+						url: 'https://cnuparking.pythonanywhere.com/parkingl'
+					});
+					var mMarker = new google.maps.Marker({
+						position: mLatLng,
+						map: map,
+						icon: m,
+						url: 'https://cnuparking.pythonanywhere.com/parkingm'
+					});
+					google.maps.event.addListener(gMarker, 'click', function() {
+						window.location.href = gMarker.url;
+					});
+					google.maps.event.addListener(jMarker, 'click', function() {
+						window.location.href = jMarker.url;
+					});
+					google.maps.event.addListener(e1Marker, 'click', function() {
+						window.location.href = e1Marker.url;
+					});
+					google.maps.event.addListener(e1Markernum, 'click', function() {
+						window.location.href = e1Markernum.url;
+					});
+					google.maps.event.addListener(e2Marker, 'click', function() {
+						window.location.href = e2Marker.url;
+					});
+					google.maps.event.addListener(e2Markernum, 'click', function() {
+						window.location.href = e2Markernum.url;
+					});
+					google.maps.event.addListener(e3Marker, 'click', function() {
+						window.location.href = e3Marker.url;
+					});
+					google.maps.event.addListener(e3Markernum, 'click', function() {
+						window.location.href = e3Markernum.url;
+					});
+					google.maps.event.addListener(e4Marker, 'click', function() {
+						window.location.href = e4Marker.url;
+					});
+					google.maps.event.addListener(e4Markernum, 'click', function() {
+						window.location.href = e4Markernum.url;
+					});
+					google.maps.event.addListener(aMarker, 'click', function() {
+						window.location.href = aMarker.url;
+					});
+					google.maps.event.addListener(hMarker, 'click', function() {
+						window.location.href = hMarker.url;
+					});
+					google.maps.event.addListener(iMarker, 'click', function() {
+						window.location.href = iMarker.url;
+					});
+					google.maps.event.addListener(c1Marker, 'click', function() {
+						window.location.href = c1Marker.url;
+					});
+					google.maps.event.addListener(c1Markernum, 'click', function() {
+						window.location.href = c1Markernum.url;
+					});
+					google.maps.event.addListener(c2Marker, 'click', function() {
+						window.location.href = c2Marker.url;
+					});
+					google.maps.event.addListener(c2Markernum, 'click', function() {
+						window.location.href = c2Markernum.url;
+					});
+					google.maps.event.addListener(dMarker, 'click', function() {
+						window.location.href = dMarker.url;
+					});
+					google.maps.event.addListener(kMarker, 'click', function() {
+						window.location.href = kMarker.url;
+					});
+					google.maps.event.addListener(lMarker, 'click', function() {
+						window.location.href = lMarker.url;
+					});
+					google.maps.event.addListener(mMarker, 'click', function() {
+						window.location.href = mMarker.url;
+					});
+					}
+
+				 function fail(){
+					 alert('navigator.geolocation failed, may not be supported');
+				 }
+				</script>
+</body>
+</html>
+
+{# RAPPAHANNOCK RIVER HALL #}
+		{% elif group_for.name == 'Rappahannock River Hall' %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+	<meta charset="utf-8">
+	<title>Google Maps User Location</title>
+	<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA16q0zdvkU-QUeqkYzKuZzeVVmmQ3mpZs&callback=myMap&libraries=geometry"></script>
+	<style>
+				#map5{width:65%;height:65%;
+							margin-left: auto;
+							margin-right: auto;}
+				</style>
+</head>
+<body onload="locate()">
+<div id="map5"></div>
+
+<script>
+				var image = 'http://www.robotwoods.com/dev/misc/bluecircle.png';
+				var g = 'https://img.icons8.com/ios-filled/40/000000/marker-g.png';
+				var j = 'https://img.icons8.com/ios-filled/40/000000/marker-j.png';
+				function locate(){
+					navigator.geolocation.getCurrentPosition(initialize,fail);
+				}
+
+				function initialize(position) {
+					var myLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+					var cnuLatLng = new google.maps.LatLng(37.063659, -76.495880);
+					var gLatLng = new google.maps.LatLng(37.063613, -76.501456);
+					var jLatLng = new google.maps.LatLng(37.063135, -76.497899);
+					var mapOptions = {
+					  zoom: 16,
+					  center: cnuLatLng,
+					  mapTypeId: google.maps.MapTypeId.HYBRID}
+					var map = new google.maps.Map(document.getElementById('map5'),
+												  mapOptions);
+					map.setOptions({styles: [{
+						featureType: "all",
+						elementType: "labels",
+						stylers: [
+						  { visibility: "off" }
+						]
+					}]});
+					var myMarker = new google.maps.Marker({
+						position: myLatLng,
+						map: map,
+						icon: image
+					});
+					var gMarker = new google.maps.Marker({
+						position: gLatLng,
+						map: map,
+						icon: g,
+						url: 'https://cnuparking.pythonanywhere.com/parkingg'
+					});
+					var jMarker = new google.maps.Marker({
+						position: jLatLng,
+						map: map,
+						icon: j,
+						url: 'https://cnuparking.pythonanywhere.com/parkingj'
+					});
+					google.maps.event.addListener(gMarker, 'click', function() {
+						window.location.href = gMarker.url;
+					});
+					google.maps.event.addListener(jMarker, 'click', function() {
+						window.location.href = jMarker.url;
+					});
+					}
+
+				 function fail(){
+					 alert('navigator.geolocation failed, may not be supported');
+				 }
+				</script>
+</body>
+</html>
+
+{# MANAGERS #}
+		{% elif group_for.name == 'managers' %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+	<meta charset="utf-8">
+	<title>Google Maps User Location</title>
+	<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA16q0zdvkU-QUeqkYzKuZzeVVmmQ3mpZs&callback=myMap&libraries=geometry"></script>
+	<style>
+				#map6{width:65%;height:65%;
+							margin-left: auto;
+							margin-right: auto;}
+				</style>
+</head>
+<body onload="locate()">
+<div id="map6"></div>
+
+<script>
+				var image = 'http://www.robotwoods.com/dev/misc/bluecircle.png';
+				var g = 'https://img.icons8.com/ios-filled/40/000000/marker-g.png';
+				var j = 'https://img.icons8.com/ios-filled/40/000000/marker-j.png';
+				var e1 = 'https://img.icons8.com/ios-filled/40/000000/marker-e.png';
+				var e1num = 'https://img.icons8.com/ios-glyphs/30/000000/1.png'
+				var e2 = 'https://img.icons8.com/ios-filled/40/000000/marker-e.png';
+				var e2num = 'https://img.icons8.com/ios-glyphs/30/000000/2.png'
+				var e3 = 'https://img.icons8.com/ios-filled/40/000000/marker-e.png';
+				var e3num = 'https://img.icons8.com/ios-glyphs/30/000000/3.png'
+				var e4 = 'https://img.icons8.com/ios-filled/40/000000/marker-e.png';
+				var e4num = 'https://img.icons8.com/ios-glyphs/30/000000/4.png';
+				var i = 'https://img.icons8.com/ios-filled/40/000000/marker-i.png';
+				var a = 'https://img.icons8.com/ios-filled/40/000000/marker-a.png';
+				var h = 'https://img.icons8.com/ios-filled/40/000000/marker-h.png';
+				var c1 = 'https://img.icons8.com/ios-filled/40/000000/marker-c.png';
+				var c1num = 'https://img.icons8.com/ios-glyphs/30/000000/1.png';
+				var c2 = 'https://img.icons8.com/ios-filled/40/000000/marker-c.png';
+				var c2num = 'https://img.icons8.com/ios-glyphs/30/000000/2.png';
+				var d = 'https://img.icons8.com/ios-filled/40/000000/marker-d.png';
+				var k = 'https://img.icons8.com/ios-filled/40/000000/marker-k.png';
+				var l = 'https://img.icons8.com/ios-filled/40/000000/marker-l.png';
+				var m = 'https://img.icons8.com/ios-filled/40/000000/marker-m.png';
+				var b = 'https://img.icons8.com/ios-filled/40/000000/marker-b.png';
+				var f = 'https://img.icons8.com/ios-filled/40/000000/marker-f.png';
+
+
+
+				function locate(){
+					navigator.geolocation.getCurrentPosition(initialize,fail);
+				}
+
+				function initialize(position) {
+					var myLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+					var cnuLatLng = new google.maps.LatLng(37.063659, -76.495880);
+					var gLatLng = new google.maps.LatLng(37.063613, -76.501456);
+					var jLatLng = new google.maps.LatLng(37.063135, -76.497899);
+					var e1LatLng = new google.maps.LatLng(37.066794, -76.493471);
+					var e1LatLng_num = new google.maps.LatLng(37.066847, -76.493008);
+					var e2LatLng = new google.maps.LatLng(37.066610, -76.495431);
+					var e2LatLng_num = new google.maps.LatLng(37.066684, -76.495014);
+					var e3LatLng = new google.maps.LatLng(37.066208, -76.497035);
+					var e3LatLng_num = new google.maps.LatLng(37.066282, -76.496613);
+					var e4LatLng = new google.maps.LatLng(37.065968, -76.498702);
+					var e4LatLng_num = new google.maps.LatLng(37.065914, -76.498426);
+					var aLatLng = new google.maps.LatLng(37.060480, -76.489624);
+					var hLatLng = new google.maps.LatLng(37.062178, -76.499984);
+					var iLatLng = new google.maps.LatLng(37.062375, -76.498347);
+					var c1LatLng = new google.maps.LatLng(37.064007, -76.491363);
+					var c1LatLng_num = new google.maps.LatLng(37.064096, -76.491103);
+					var c2LatLng = new google.maps.LatLng(37.063207, -76.490231);
+					var c2LatLng_num = new google.maps.LatLng(37.063038, -76.490060);
+					var dLatLng = new google.maps.LatLng(37.065137, -76.493822);
+					var kLatLng = new google.maps.LatLng(37.062073, -76.497454);
+					var lLatLng = new google.maps.LatLng(37.061634, -76.496979);
+					var mLatLng = new google.maps.LatLng(37.061617, -76.495226);
+					var bLatLng = new google.maps.LatLng(37.063819, -76.491703);
+					var fLatLng = new google.maps.LatLng(37.064692, -76.496808);
+
+					var mapOptions = {
+					  zoom: 16,
+					  center: cnuLatLng,
+					  mapTypeId: google.maps.MapTypeId.HYBRID}
+					var map = new google.maps.Map(document.getElementById('map6'),
+												  mapOptions);
+					map.setOptions({styles: [{
+						featureType: "all",
+						elementType: "labels",
+						stylers: [
+						  { visibility: "off" }
+						]
+					}]});
+					var myMarker = new google.maps.Marker({
+						position: myLatLng,
+						map: map,
+						icon: image
+					});
+					var gMarker = new google.maps.Marker({
+						position: gLatLng,
+						map: map,
+						icon: g,
+						url: 'https://cnuparking.pythonanywhere.com/parkingg'
+					});
+					var jMarker = new google.maps.Marker({
+						position: jLatLng,
+						map: map,
+						icon: j,
+						url: 'https://cnuparking.pythonanywhere.com/parkingj'
+					});
+					var aMarker = new google.maps.Marker({
+						position: aLatLng,
+						map: map,
+						icon: a,
+						url: 'https://cnuparking.pythonanywhere.com/parkinga'
+					});
+					var hMarker = new google.maps.Marker({
+						position: hLatLng,
+						map: map,
+						icon: h,
+						url: 'https://cnuparking.pythonanywhere.com/parkingh'
+					});
+					var e1Marker = new google.maps.Marker({
+						position: e1LatLng,
+						map: map,
+						icon: e1,
+						url: 'https://cnuparking.pythonanywhere.com/parkinge1'
+					});
+					var e1Markernum = new google.maps.Marker({
+						position: e1LatLng_num,
+						map: map,
+						icon: e1num,
+						url: 'https://cnuparking.pythonanywhere.com/parkinge1'
+					});
+
+					var e2Marker = new google.maps.Marker({
+						position: e2LatLng,
+						map: map,
+						icon: e2,
+						url: 'https://cnuparking.pythonanywhere.com/parkinge2'
+					});
+					var e2Markernum = new google.maps.Marker({
+						position: e2LatLng_num,
+						map: map,
+						icon: e2num,
+						url: 'https://cnuparking.pythonanywhere.com/parkinge2'
+					});
+					var e3Marker = new google.maps.Marker({
+						position: e3LatLng,
+						map: map,
+						icon: e3,
+						url: 'https://cnuparking.pythonanywhere.com/parkinge3'
+					});
+					var e3Markernum = new google.maps.Marker({
+						position: e3LatLng_num,
+						map: map,
+						icon: e3num,
+						url: 'https://cnuparking.pythonanywhere.com/parkinge3'
+					});
+					var e4Marker = new google.maps.Marker({
+						position: e4LatLng,
+						map: map,
+						icon: e4,
+						url: 'https://cnuparking.pythonanywhere.com/parkinge4'
+					});
+					var e4Markernum = new google.maps.Marker({
+						position: e4LatLng_num,
+						map: map,
+						icon: e4num,
+						url: 'https://cnuparking.pythonanywhere.com/parkinge4'
+					});
+					var iMarker = new google.maps.Marker({
+						position: iLatLng,
+						map: map,
+						icon: i,
+						url: 'https://cnuparking.pythonanywhere.com/parkingi'
+					});
+					var c1Marker = new google.maps.Marker({
+						position: c1LatLng,
+						map: map,
+						icon: c1,
+						url: 'https://cnuparking.pythonanywhere.com/parkingc1'
+					});
+					var c1Markernum = new google.maps.Marker({
+						position: c1LatLng_num,
+						map: map,
+						icon: c1num,
+						url: 'https://cnuparking.pythonanywhere.com/parkingc1'
+					});
+					var c2Marker = new google.maps.Marker({
+						position: c2LatLng,
+						map: map,
+						icon: c2,
+						url: 'https://cnuparking.pythonanywhere.com/parkingc2'
+					});
+					var c2Markernum = new google.maps.Marker({
+						position: c2LatLng_num,
+						map: map,
+						icon: c2num,
+						url: 'https://cnuparking.pythonanywhere.com/parkingc2'
+					});
+					var dMarker = new google.maps.Marker({
+						position: dLatLng,
+						map: map,
+						icon: d,
+						url: 'https://cnuparking.pythonanywhere.com/parkingd'
+					});
+					var kMarker = new google.maps.Marker({
+						position: kLatLng,
+						map: map,
+						icon: k,
+						url: 'https://cnuparking.pythonanywhere.com/parkingk'
+					});
+					var lMarker = new google.maps.Marker({
+						position: lLatLng,
+						map: map,
+						icon: l,
+						url: 'https://cnuparking.pythonanywhere.com/parkingl'
+					});
+					var mMarker = new google.maps.Marker({
+						position: mLatLng,
+						map: map,
+						icon: m,
+						url: 'https://cnuparking.pythonanywhere.com/parkingm'
+					});
+					var bMarker = new google.maps.Marker({
+						position: bLatLng,
+						map: map,
+						icon: b,
+						url: 'https://cnuparking.pythonanywhere.com/parkingb'
+					});
+					var fMarker = new google.maps.Marker({
+						position: fLatLng,
+						map: map,
+						icon: f,
+						url: 'https://cnuparking.pythonanywhere.com/parkingf'
+					});
+					google.maps.event.addListener(gMarker, 'click', function() {
+						window.location.href = gMarker.url;
+					});
+					google.maps.event.addListener(jMarker, 'click', function() {
+						window.location.href = jMarker.url;
+					});
+					google.maps.event.addListener(e1Marker, 'click', function() {
+						window.location.href = e1Marker.url;
+					});
+					google.maps.event.addListener(e1Markernum, 'click', function() {
+						window.location.href = e1Markernum.url;
+					});
+					google.maps.event.addListener(e2Marker, 'click', function() {
+						window.location.href = e2Marker.url;
+					});
+					google.maps.event.addListener(e2Markernum, 'click', function() {
+						window.location.href = e2Markernum.url;
+					});
+					google.maps.event.addListener(e3Marker, 'click', function() {
+						window.location.href = e3Marker.url;
+					});
+					google.maps.event.addListener(e3Markernum, 'click', function() {
+						window.location.href = e3Markernum.url;
+					});
+					google.maps.event.addListener(e4Marker, 'click', function() {
+						window.location.href = e4Marker.url;
+					});
+					google.maps.event.addListener(e4Markernum, 'click', function() {
+						window.location.href = e4Markernum.url;
+					});
+					google.maps.event.addListener(aMarker, 'click', function() {
+						window.location.href = aMarker.url;
+					});
+					google.maps.event.addListener(hMarker, 'click', function() {
+						window.location.href = hMarker.url;
+					});
+					google.maps.event.addListener(iMarker, 'click', function() {
+						window.location.href = iMarker.url;
+					});
+					google.maps.event.addListener(c1Marker, 'click', function() {
+						window.location.href = c1Marker.url;
+					});
+					google.maps.event.addListener(c1Markernum, 'click', function() {
+						window.location.href = c1Markernum.url;
+					});
+					google.maps.event.addListener(c2Marker, 'click', function() {
+						window.location.href = c2Marker.url;
+					});
+					google.maps.event.addListener(c2Markernum, 'click', function() {
+						window.location.href = c2Markernum.url;
+					});
+					google.maps.event.addListener(dMarker, 'click', function() {
+						window.location.href = dMarker.url;
+					});
+					google.maps.event.addListener(kMarker, 'click', function() {
+						window.location.href = kMarker.url;
+					});
+					google.maps.event.addListener(lMarker, 'click', function() {
+						window.location.href = lMarker.url;
+					});
+					google.maps.event.addListener(mMarker, 'click', function() {
+						window.location.href = mMarker.url;
+					});
+					google.maps.event.addListener(bMarker, 'click', function() {
+						window.location.href = bMarker.url;
+					});
+					google.maps.event.addListener(fMarker, 'click', function() {
+						window.location.href = fMarker.url;
+					});
+					}
+
+				 function fail(){
+					 alert('navigator.geolocation failed, may not be supported');
+				 }
+				</script>
+</body>
+</html>
+
+		{% endif %}
+	{% endfor %}
+{% endblock %}
